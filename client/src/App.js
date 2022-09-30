@@ -3,11 +3,13 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 
+const baseUrl = 'https://word-graph-analytics.herokuapp.com'
+
 function App() {
   const [world, setWorld] = useState('teste')
 
   useEffect(()=>{
-    axios.get('http://localhost:3001/world')
+    axios.get(`${baseUrl}/world`)
     .then(res => {
       setWorld(res.data.teste)
     })    
