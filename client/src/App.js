@@ -87,7 +87,7 @@ function App() {
           <>
             <VisNetwork nodes={graph.nodes} edges={graph.edges} />
             <Typography variant="p" component="p" gutterBottom>
-              Analisador de sentidos da palavra.
+              Analisador de sentidos.
             </Typography>
           </>
         }
