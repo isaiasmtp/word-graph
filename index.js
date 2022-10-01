@@ -74,7 +74,12 @@ const graph = async (word) => {
 }
 
 const similarWords = async (word) => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+        ],
+      });
     const page = await browser.newPage();
 
     await page.goto(`${SINONIMOS_URL}/${word}/`)
