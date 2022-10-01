@@ -78,7 +78,7 @@ const similarWords = async (word) => {
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
-        ], headless: false
+        ]
       });
     const page = await browser.newPage();
     await page.goto(`${SINONIMOS_URL}/${word}/`)
