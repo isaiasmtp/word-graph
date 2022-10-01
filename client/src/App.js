@@ -4,183 +4,42 @@ import { CssBaseline, Box, Typography, TextField, Container } from '@mui/materia
 import { Search }from '@mui/icons-material';
 
 import { ColorButton } from './components/StyledComponents';
-import TreeChart from './components/TreeChart';
 import DataGridTrends from './components/DataGridTrends';
 import Footer from './components/Footer';
 
 import axios from  'axios'
+import VisNetwork from './components/VisNetwork';
+
 
 //const baseUrl = 'https://word-graph-analytics.herokuapp.com'
 const baseUrl = 'http://localhost:3001'
 
-const initialData = {
-  name: "Maria....",
-  children: [
-   
-    {
-      name: "EU",
-      children: [
-        {
-          name: "testeeeeee"
-        },
-        {
-          name: "outroooooo"
-        },
-        {
-          name: "🤣", 
-          children: [
-            {
-              name: "TE"
-            },
-            {
-              name: "outroooooo"
-            },
-            {
-              name: "🤣",
-              children: [
-                {
-                  name: "testeeeeee"
-                },
-                {
-                  name: "outroooooo"
-                },
-                {
-                  name: "AMOOO"
-                }
-              ]
-            }
-          ]
-          
-        }
-      ]
-    },
-    {
-      name: "EU",
-      children: [
-        {
-          name: "testeeeeee"
-        },
-        {
-          name: "outroooooo"
-        },
-        {
-          name: "🤣", 
-          children: [
-            {
-              name: "TE"
-            },
-            {
-              name: "outroooooo"
-            },
-            {
-              name: "🤣",
-              children: [
-                {
-                  name: "testeeeeee"
-                },
-                {
-                  name: "outroooooo"
-                },
-                {
-                  name: "AMOOO"
-                }
-              ]
-            }
-          ]
-          
-        }
-      ]
-    },
-    {
-      name: "EU",
-      children: [
-        {
-          name: "testeeeeee"
-        },
-        {
-          name: "outroooooo"
-        },
-        {
-          name: "🤣", 
-          children: [
-            {
-              name: "TE"
-            },
-            {
-              name: "outroooooo"
-            },
-            {
-              name: "🤣",
-              children: [
-                {
-                  name: "testeeeeee"
-                },
-                {
-                  name: "outroooooo"
-                },
-                {
-                  name: "AMOOO"
-                }
-              ]
-            }
-          ]
-          
-        }
-      ]
-    },
-
-    {
-      name: "EU",
-      children: [
-        {
-          name: "testeeeeee"
-        },
-        {
-          name: "😁"
-        },
-        {
-          name: "🤣", 
-          children: [
-            {
-              name: "TE"
-            },
-            {
-              name: "😁"
-            },
-            {
-              name: "🤣",
-              children: [
-                {
-                  name: "testeeeeee"
-                },
-                {
-                  name: "😁"
-                },
-                {
-                  name: "AMOOO"
-                }
-              ]
-            }
-          ]
-          
-        }
-      ]
-    },
-  ]
-};
-
-
 function App() {
+
   const [word, setWord] = useState('')
-  const [data, setData] = useState(initialData)
 
-  const handleGenerate = () => {
-    axios.get(`${baseUrl}/word`)
-    .then(res => {
-      
-    })   
-  }
+    const handleGenerate = () => {
+      axios.get(`${baseUrl}/word`)
+      .then(res => {
+        
+      })   
+    }
 
+    const nodes = [
+      { id: 1, label: "Word", color: "#fff", value:20 },
+      { id: 2, label: "Node 2", color: "#c2c2c2", value:10 },
+      { id: 3, label: "Node 3", color: "#c2c2c2", value:10 },
+      { id: 4, label: "Node 4", color: "#c2c2c2",  value:10 },
+      { id: 5, label: "Node 5", color: "#c2c2c2",  value:10 }
+    ]
+
+    const edges = [
+      { from: 1, to: 2 },
+      { from: 1, to: 3 },
+      { from: 2, to: 4 },
+      { from: 2, to: 5 }
+    ]
+    
   return (
     <Box
       sx={{
@@ -204,11 +63,13 @@ function App() {
         </Stack>
       </Container>
 
-      <Box>
-        <TreeChart data={data} />
+      <Box sx={{margin:'1em'}}>
+        {/* <TreeChart data={data} /> */}
+        <VisNetwork nodes={nodes} edges={edges} />
+        <DataGridTrends />
       </Box>
+
       
-      <DataGridTrends />
       <Footer />
     </Box>
   );
