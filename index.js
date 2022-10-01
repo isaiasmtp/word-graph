@@ -78,12 +78,10 @@ const similarWords = async (word) => {
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
-        ],
+        ], headless: false
       });
     const page = await browser.newPage();
-
     await page.goto(`${SINONIMOS_URL}/${word}/`)
-
     
     const pageData = await page.evaluate(() => {
         let data =  []
@@ -97,7 +95,7 @@ const similarWords = async (word) => {
         for (let i=0; i<sentido.length;i++){
             sentido[i] = sentido[i].slice(0, -1)
         }
-        
+
         for (let i = 0; i < sinonimos.length; i++){
             words = []
             for (let j = 0; j < sinonimos[i].length; j++){
