@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Button } from "@mui/material";
+import { Button, CircularProgress, TextField } from "@mui/material";
 import { grey } from '@mui/material/colors';
 
 const ColorButton = styled(Button)(({ theme }) => ({
@@ -10,4 +10,23 @@ const ColorButton = styled(Button)(({ theme }) => ({
     },
 }));
 
-export { ColorButton }
+const CustomCircularProgress = styled(CircularProgress)(({ theme }) => ({
+  color: grey[800],
+}));
+
+const CustomTextField = styled(TextField)`
+  & label.Mui-focused {
+    color: gray;
+  }
+  & .MuiOutlinedInput-root {
+    &.Mui-focused fieldset {
+      border-color: gray;
+    }
+  }
+  & .MuiInput-root:after {
+    border-bottom: 2px solid #c2c2c2;
+  }
+`;
+
+
+export { ColorButton, CustomTextField, CustomCircularProgress }
