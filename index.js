@@ -13,7 +13,7 @@ app.use(cors())
 app.use(express.static(path.join(__dirname + "/client/build")))
 
 
-app.get('/world', async (req, res) => {
+app.get('/word', async (req, res) => {
     res.send({teste: '1'})
 })
 
