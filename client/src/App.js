@@ -1,15 +1,12 @@
+import axios from  'axios'
 import { useState } from 'react';
 import { Stack } from '@mui/system';
 import { CssBaseline, Box, Typography, Container } from '@mui/material';
 import { Search }from '@mui/icons-material';
-
 import { ColorButton, CustomCircularProgress, CustomTextField } from './components/StyledComponents';
-import DataGridTrends from './components/DataGridTrends';
-import Footer from './components/Footer';
 
-import axios from  'axios'
 import VisNetwork from './components/VisNetwork';
-
+import Footer from './components/Footer';
 
 const baseUrl = 'https://word-graph-analytics.herokuapp.com'
 //const baseUrl = 'http://localhost:3001'
@@ -24,10 +21,14 @@ function App() {
     edges: []
   })
 
+  const handleWord = (e) => { 
+    setWord(e.target.value.trim())
+  }
+
     const handleGenerate = () => {
       setLoading(true)
 
-      axios.get(`${baseUrl}/word`)
+      axios.post(`${baseUrl}/word`,{ word })
       .then(res => {
         if(res.status === 200){
           const edges = res.data.edges
@@ -44,8 +45,6 @@ function App() {
         setLoading(false)
       })   
     }
-
-   
     
   return (
     <Box
@@ -57,24 +56,24 @@ function App() {
     >
       <CssBaseline />
 
-      <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
+      <Container component="main" sx={{ mt: 5, mb: 2 }} maxWidth="sm">
         <Typography variant="h2" component="h1" gutterBottom>
           Word Graph Analytics
         </Typography>
 
         <Stack direction="row" spacing={2}>          
-          <CustomTextField id="standard-basic" value={word} onChange={e => setWord(e.target.value)} label="Word" variant="standard" />
+          <CustomTextField id="standard-basic" value={word} onChange={handleWord} label="Word" variant="standard" />
           <ColorButton 
             disabled={loading} 
             variant="outline" 
             onClick={handleGenerate} 
             endIcon={ !loading && <Search/>}>
-            { !loading ? <span>Generate</span> : <span>Loading</span>}
+            { !loading ? <span>Generate</span> : <span>Loading...</span>}
           </ColorButton>
         </Stack>
       </Container>
 
-      <Box sx={{margin:'1em'}}>
+      <Box sx={{margin:'0.5em'}}>
         {/* <TreeChart data={data} /> */}
 
         { loading &&
@@ -85,10 +84,12 @@ function App() {
         
         {
           !loading &&
-            <>
-              <VisNetwork nodes={graph.nodes} edges={graph.edges} />
-              <DataGridTrends />
-            </>
+          <>
+            <VisNetwork nodes={graph.nodes} edges={graph.edges} />
+            <Typography variant="p" component="p" gutterBottom>
+              Sentidos de palavras.
+            </Typography>
+          </>
         }
 
       </Box>

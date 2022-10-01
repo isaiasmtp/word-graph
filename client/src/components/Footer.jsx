@@ -5,10 +5,13 @@ const Copyright =() => {
       <Typography variant="body2" color="text.secondary">
         {'Copyright © '}
         <Link color="inherit" href="https://github.com/isaiasmtp/">
-          Isaías Martins | @isaiasmtp
+          Isaías Martins
         </Link>{' '}
         {new Date().getFullYear()}
-        {'.'}
+        {' '}| Fonte: {' '}
+        <Link color="inherit" href="https://www.sinonimos.com.br/">
+          Sinonimos
+        </Link>
       </Typography>
     );
   }

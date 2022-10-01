@@ -36,7 +36,7 @@ const VisNetwork = ({nodes, edges}) => {
             graph={graph} 
             options={options} 
             events={events} 
-            style={{ height: "400px", backgroundColor: "#e9e9e9", border:'1px solid lightgray' }} />
+            style={{ height: "60vh", backgroundColor: "#e9e9e9", border:'1px solid lightgray' }} />
         )
 
 };
